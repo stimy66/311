@@ -1,423 +1,2403 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>مطعم 311 — توصيل وطلبات التوصيل في حاسي بحبح</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <!-- Tailwind CDN -->
-  <script src="https://cdn.tailwindcss.com"></script>
-  <script>
-    // Tailwind config: enable RTL-friendly utilities if needed
-    tailwind.config = {
-      theme: {
-        extend: {
-          colors: {
-            'charcoal': '#0f1724',
-            'slate-900': '#0b1020',
-            'amber-500': '#f59e0b',
-            'amber-600': '#d97706'
-          },
+    <title>مطعم 311 — حاسي بحبح</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
         }
-      }
-    }
-  </script>
 
-  <!-- Google Font (Arabic) -->
-  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700&display=swap" rel="stylesheet">
+        html {
+            scroll-behavior: smooth;
+        }
 
-  <style>
-    :root { --bg: #0b1020; --card: #0f1724; --accent: #f59e0b; --muted: #9aa3b2; }
-    html,body { font-family: 'Cairo', sans-serif; background: linear-gradient(180deg,#05060a 0%, #071026 60%); }
-    /* ensure RTL alignment for some elements */
-    body { direction: rtl; }
-    /* small custom tweaks */
-    .glass { backdrop-filter: blur(6px); background-color: rgba(255,255,255,0.02); }
-    .accent-btn { background: linear-gradient(90deg,var(--accent), #ff8a00); }
-  </style>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+        body {
+            font-family: "Cairo", sans-serif;
+            background: #fffaf5;
+            color: #222;
+        }
+
+        button,
+        input,
+        textarea {
+            font-family: inherit;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        img {
+            display: block;
+            width: 100%;
+        }
+
+        /* ================= HEADER ================= */
+
+        header {
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            background: rgba(255,255,255,.96);
+            backdrop-filter: blur(12px);
+            border-bottom: 1px solid #eee;
+        }
+
+        .nav {
+            max-width: 1200px;
+            margin: auto;
+            padding: 15px 20px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 23px;
+            font-weight: 900;
+            color: #e63946;
+        }
+
+        .logo-icon {
+            width: 45px;
+            height: 45px;
+            border-radius: 14px;
+            background: #e63946;
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 25px;
+        }
+
+        .nav-links a {
+            font-size: 15px;
+            font-weight: 800;
+        }
+
+        .nav-links a:hover {
+            color: #e63946;
+        }
+
+        .cart-btn {
+            position: relative;
+            width: 48px;
+            height: 48px;
+            border: 0;
+            border-radius: 14px;
+            background: #e63946;
+            color: white;
+            cursor: pointer;
+            font-size: 19px;
+        }
+
+        .cart-count {
+            position: absolute;
+            top: -6px;
+            left: -6px;
+            width: 22px;
+            height: 22px;
+            background: #111;
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 11px;
+            font-weight: 900;
+        }
+
+        /* ================= HERO ================= */
+
+        .hero {
+            min-height: 620px;
+            display: flex;
+            align-items: center;
+            background:
+                linear-gradient(rgba(0,0,0,.58),rgba(0,0,0,.7)),
+                url("https://images.unsplash.com/photo-1579751626657-72bc17010498?auto=format&fit=crop&w=1800&q=85")
+                center/cover;
+            color: white;
+        }
+
+        .hero-content {
+            max-width: 1200px;
+            width: 100%;
+            margin: auto;
+            padding: 70px 20px;
+        }
+
+        .hero-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 9px 15px;
+            border-radius: 30px;
+            background: rgba(255,255,255,.15);
+            border: 1px solid rgba(255,255,255,.25);
+            margin-bottom: 20px;
+            font-size: 14px;
+        }
+
+        .hero h1 {
+            font-size: clamp(42px,7vw,76px);
+            line-height: 1.15;
+            font-weight: 900;
+            margin-bottom: 18px;
+        }
+
+        .hero h1 span {
+            color: #ffcc4d;
+            display: block;
+        }
+
+        .hero p {
+            max-width: 650px;
+            color: #eee;
+            font-size: 18px;
+            line-height: 2;
+            margin-bottom: 30px;
+        }
+
+        .hero-buttons {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+        }
+
+        .btn {
+            border: 0;
+            padding: 14px 22px;
+            border-radius: 13px;
+            cursor: pointer;
+            font-size: 15px;
+            font-weight: 800;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 9px;
+            transition: .2s;
+        }
+
+        .btn-primary {
+            background: #e63946;
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background: #d92e3c;
+            transform: translateY(-2px);
+        }
+
+        .btn-light {
+            background: white;
+            color: #222;
+        }
+
+        .btn-light:hover {
+            transform: translateY(-2px);
+        }
+
+        /* ================= SECTION ================= */
+
+        .section {
+            max-width: 1200px;
+            margin: auto;
+            padding: 80px 20px;
+        }
+
+        .section-head {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        .section-head small {
+            color: #e63946;
+            font-weight: 900;
+        }
+
+        .section-head h2 {
+            font-size: 38px;
+            font-weight: 900;
+            margin-top: 6px;
+        }
+
+        .section-head p {
+            color: #777;
+            margin-top: 6px;
+        }
+
+        /* ================= CATEGORIES ================= */
+
+        .categories {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-bottom: 35px;
+        }
+
+        .category-btn {
+            border: 1px solid #ddd;
+            background: white;
+            padding: 10px 18px;
+            border-radius: 30px;
+            cursor: pointer;
+            font-weight: 800;
+        }
+
+        .category-btn.active,
+        .category-btn:hover {
+            background: #e63946;
+            color: white;
+            border-color: #e63946;
+        }
+
+        /* ================= PRODUCTS ================= */
+
+        .products {
+            display: grid;
+            grid-template-columns: repeat(3,1fr);
+            gap: 24px;
+        }
+
+        .product-card {
+            background: white;
+            border: 1px solid #eee;
+            border-radius: 22px;
+            overflow: hidden;
+            box-shadow: 0 8px 30px rgba(0,0,0,.05);
+            transition: .25s;
+        }
+
+        .product-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 40px rgba(0,0,0,.09);
+        }
+
+        .product-image {
+            height: 230px;
+            background: #eee;
+            overflow: hidden;
+        }
+
+        .product-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: .4s;
+        }
+
+        .product-card:hover .product-image img {
+            transform: scale(1.05);
+        }
+
+        .product-content {
+            padding: 19px;
+        }
+
+        .product-title {
+            font-size: 20px;
+            font-weight: 900;
+            margin-bottom: 5px;
+        }
+
+        .product-description {
+            color: #777;
+            font-size: 13px;
+            line-height: 1.8;
+            min-height: 45px;
+        }
+
+        .sizes {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 7px;
+            margin: 15px 0;
+        }
+
+        .size-btn {
+            border: 1px solid #ddd;
+            background: white;
+            padding: 7px 11px;
+            border-radius: 9px;
+            cursor: pointer;
+            font-size: 12px;
+            font-weight: 700;
+        }
+
+        .size-btn.active {
+            border-color: #e63946;
+            background: #fff1f2;
+            color: #e63946;
+        }
+
+        .product-bottom {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .price {
+            font-size: 19px;
+            font-weight: 900;
+            color: #e63946;
+        }
+
+        .add-btn {
+            border: 0;
+            background: #111;
+            color: white;
+            padding: 10px 16px;
+            border-radius: 10px;
+            cursor: pointer;
+            font-weight: 800;
+        }
+
+        .add-btn:hover {
+            background: #e63946;
+        }
+
+        /* ================= FEATURES ================= */
+
+        .features {
+            background: #171717;
+            color: white;
+        }
+
+        .features-grid {
+            max-width: 1200px;
+            margin: auto;
+            padding: 65px 20px;
+            display: grid;
+            grid-template-columns: repeat(3,1fr);
+            gap: 25px;
+        }
+
+        .feature {
+            text-align: center;
+            padding: 20px;
+        }
+
+        .feature i {
+            width: 60px;
+            height: 60px;
+            background: #e63946;
+            border-radius: 18px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: auto auto 15px;
+            font-size: 24px;
+        }
+
+        .feature h3 {
+            margin-bottom: 7px;
+        }
+
+        .feature p {
+            color: #aaa;
+            font-size: 14px;
+        }
+
+        /* ================= CART ================= */
+
+        .overlay {
+            position: fixed;
+            inset: 0;
+            background: rgba(0,0,0,.55);
+            z-index: 1999;
+            display: none;
+        }
+
+        .overlay.show {
+            display: block;
+        }
+
+        .cart-drawer {
+            position: fixed;
+            top: 0;
+            right: -450px;
+            width: min(450px,100%);
+            height: 100vh;
+            background: white;
+            z-index: 2000;
+            display: flex;
+            flex-direction: column;
+            transition: .3s;
+            box-shadow: -10px 0 40px rgba(0,0,0,.18);
+        }
+
+        .cart-drawer.open {
+            right: 0;
+        }
+
+        .cart-header {
+            padding: 20px;
+            border-bottom: 1px solid #eee;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .cart-header h3 {
+            font-size: 21px;
+            font-weight: 900;
+        }
+
+        .close-cart {
+            width: 40px;
+            height: 40px;
+            border: 0;
+            background: #f5f5f5;
+            border-radius: 10px;
+            cursor: pointer;
+            font-size: 18px;
+        }
+
+        .cart-items {
+            flex: 1;
+            overflow-y: auto;
+            padding: 15px;
+        }
+
+        .empty-cart {
+            text-align: center;
+            padding: 70px 20px;
+            color: #888;
+        }
+
+        .empty-cart i {
+            font-size: 50px;
+            color: #ddd;
+            margin-bottom: 15px;
+        }
+
+        .empty-cart h4 {
+            color: #333;
+            margin-bottom: 7px;
+        }
+
+        .cart-item {
+            display: grid;
+            grid-template-columns: 70px 1fr;
+            gap: 12px;
+            padding: 12px 0;
+            border-bottom: 1px solid #eee;
+        }
+
+        .cart-item-img {
+            width: 70px;
+            height: 70px;
+            object-fit: cover;
+            border-radius: 12px;
+        }
+
+        .cart-item-info h4 {
+            font-size: 14px;
+            font-weight: 900;
+        }
+
+        .cart-item-size {
+            color: #888;
+            font-size: 11px;
+            margin: 3px 0;
+        }
+
+        .cart-item-price {
+            color: #e63946;
+            font-size: 13px;
+            font-weight: 900;
+        }
+
+        .cart-actions {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-top: 8px;
+        }
+
+        .quantity {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .quantity button {
+            width: 27px;
+            height: 27px;
+            border: 1px solid #ddd;
+            background: white;
+            border-radius: 7px;
+            cursor: pointer;
+        }
+
+        .quantity span {
+            min-width: 18px;
+            text-align: center;
+            font-weight: 800;
+        }
+
+        .delete-item {
+            border: 0;
+            background: transparent;
+            color: #e63946;
+            cursor: pointer;
+        }
+
+        .cart-footer {
+            padding: 18px;
+            border-top: 1px solid #eee;
+        }
+
+        .summary-row {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 9px;
+            font-size: 14px;
+        }
+
+        .summary-row.total {
+            border-top: 1px dashed #ddd;
+            padding-top: 13px;
+            margin-top: 10px;
+            font-size: 18px;
+            font-weight: 900;
+        }
+
+        .cod-box {
+            background: #f7f7f7;
+            border-radius: 13px;
+            padding: 12px;
+            margin: 14px 0;
+            display: flex;
+            gap: 10px;
+            font-size: 12px;
+            line-height: 1.8;
+        }
+
+        .cod-box i {
+            color: #e63946;
+            margin-top: 3px;
+        }
+
+        .clear-cart {
+            width: 100%;
+            border: 1px solid #ddd;
+            background: white;
+            padding: 10px;
+            border-radius: 10px;
+            cursor: pointer;
+            font-weight: 800;
+            margin-bottom: 8px;
+        }
+
+        .checkout-btn {
+            width: 100%;
+        }
+
+        /* ================= CHECKOUT ================= */
+
+        .checkout-section {
+            background: #f5f5f5;
+        }
+
+        .checkout-box {
+            max-width: 750px;
+            margin: auto;
+            background: white;
+            border-radius: 25px;
+            padding: 30px;
+            box-shadow: 0 10px 40px rgba(0,0,0,.06);
+        }
+
+        .checkout-title {
+            text-align: center;
+            margin-bottom: 25px;
+        }
+
+        .checkout-title h2 {
+            font-size: 30px;
+            font-weight: 900;
+        }
+
+        .checkout-title p {
+            color: #777;
+        }
+
+        .payment-notice {
+            background: #fff5e6;
+            border: 1px solid #ffdca8;
+            border-radius: 15px;
+            padding: 15px;
+            margin-bottom: 22px;
+            display: flex;
+            gap: 12px;
+            line-height: 1.8;
+        }
+
+        .payment-notice i {
+            color: #e63946;
+            font-size: 22px;
+        }
+
+        .form-grid {
+            display: grid;
+            grid-template-columns: repeat(2,1fr);
+            gap: 16px;
+        }
+
+        .form-group.full {
+            grid-column: 1/-1;
+        }
+
+        .form-group label {
+            display: block;
+            font-size: 13px;
+            font-weight: 800;
+            margin-bottom: 7px;
+        }
+
+        .form-group input,
+        .form-group textarea {
+            width: 100%;
+            border: 1px solid #ddd;
+            padding: 13px 14px;
+            border-radius: 11px;
+            outline: none;
+            font-size: 14px;
+        }
+
+        .form-group input:focus,
+        .form-group textarea:focus {
+            border-color: #e63946;
+        }
+
+        .form-group textarea {
+            resize: vertical;
+            min-height: 100px;
+        }
+
+        .submit-order {
+            width: 100%;
+            margin-top: 18px;
+        }
+
+        /* ================= FOOTER ================= */
+
+        footer {
+            background: #111;
+            color: white;
+            padding: 55px 20px 25px;
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: auto;
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr;
+            gap: 35px;
+        }
+
+        .footer-brand h3 {
+            color: #e63946;
+            font-size: 25px;
+            margin-bottom: 10px;
+        }
+
+        .footer-brand p {
+            color: #aaa;
+            line-height: 1.9;
+            font-size: 14px;
+        }
+
+        .footer-col h4 {
+            margin-bottom: 15px;
+        }
+
+        .footer-col a {
+            display: block;
+            color: #aaa;
+            margin-bottom: 8px;
+            font-size: 14px;
+        }
+
+        .footer-col a:hover {
+            color: white;
+        }
+
+        .footer-bottom {
+            max-width: 1200px;
+            margin: 40px auto 0;
+            padding-top: 20px;
+            border-top: 1px solid #333;
+            text-align: center;
+            color: #777;
+            font-size: 12px;
+        }
+
+        /* ================= TOAST ================= */
+
+        .toast {
+            position: fixed;
+            bottom: 25px;
+            left: 25px;
+            background: #111;
+            color: white;
+            padding: 13px 18px;
+            border-radius: 12px;
+            z-index: 3000;
+            transform: translateY(100px);
+            opacity: 0;
+            pointer-events: none;
+            transition: .3s;
+            font-size: 13px;
+        }
+
+        .toast.show {
+            transform: translateY(0);
+            opacity: 1;
+        }
+
+        /* ================= MOBILE ================= */
+
+        @media (max-width: 900px) {
+
+            .products {
+                grid-template-columns: repeat(2,1fr);
+            }
+
+            .features-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .footer-content {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+
+        @media (max-width: 650px) {
+
+            .nav-links {
+                display: none;
+            }
+
+            .hero {
+                min-height: 560px;
+            }
+
+            .hero p {
+                font-size: 15px;
+            }
+
+            .section {
+                padding: 60px 15px;
+            }
+
+            .products {
+                grid-template-columns: 1fr;
+            }
+
+            .form-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .form-group.full {
+                grid-column: auto;
+            }
+
+            .checkout-box {
+                padding: 20px;
+            }
+
+            .footer-content {
+                grid-template-columns: 1fr;
+            }
+
+            .toast {
+                left: 15px;
+                right: 15px;
+                text-align: center;
+            }
+        }
+    </style>
 </head>
-<body class="min-h-screen text-gray-100">
 
-  <!-- HEADER / HERO -->
-  <header class="glass sticky top-0 z-50 border-b border-gray-800">
-    <div class="max-w-6xl mx-auto px-4 py-4 flex items-center justify-between">
-      <div class="flex items-center gap-4">
-        <div class="rounded-full w-14 h-14 bg-gradient-to-tr from-amber-500 to-orange-500 flex items-center justify-center text-black font-bold text-lg shadow-lg">
-          311
-        </div>
-        <div>
-          <h1 class="text-2xl font-bold">مطعم 311</h1>
-          <p class="text-sm text-gray-400">أصل المذاق الرفيع في قلب حاسي بحبح</p>
-        </div>
-      </div>
+<body>
 
-      <div class="flex items-center gap-4">
-        <nav class="hidden md:flex items-center gap-3">
-          <a href="#menu" class="text-gray-300 hover:text-white">قائمة الطعام</a>
-          <a href="#cart" class="text-gray-300 hover:text-white">السلة</a>
-          <a href="#contact" class="text-gray-300 hover:text-white">اتصل بنا</a>
-        </nav>
+<!-- ================= HEADER ================= -->
 
-        <!-- Social icons -->
-        <div class="flex items-center gap-3">
-          <a href="https://instagram.com/" target="_blank" aria-label="Instagram" class="text-2xl text-gray-300 hover:text-amber-500 transition-colors p-3 rounded-full bg-transparent hover:bg-gray-800">
-            <i class="fa-brands fa-instagram"></i>
-          </a>
-          <a href="https://facebook.com/" target="_blank" aria-label="Facebook" class="text-2xl text-gray-300 hover:text-amber-500 transition-colors p-3 rounded-full bg-transparent hover:bg-gray-800">
-            <i class="fa-brands fa-facebook-f"></i>
-          </a>
-          <a href="tel:+213XXXXXXXXX" aria-label="اتصال" class="text-2xl text-gray-300 hover:text-amber-500 transition-colors p-3 rounded-full bg-transparent hover:bg-gray-800">
-            <i class="fa-solid fa-phone"></i>
-          </a>
-        </div>
-      </div>
-    </div>
-  </header>
+<header>
+    <nav class="nav">
 
-  <main class="max-w-6xl mx-auto px-4 py-8">
-
-    <!-- HERO -->
-    <section class="grid grid-cols-1 md:grid-cols-2 gap-8 items-center mb-8">
-      <div class="space-y-4">
-        <h2 class="text-4xl md:text-5xl font-extrabold" style="color: #fff;">مطعم 311</h2>
-        <p class="text-lg text-gray-300">مطعم 311: أصل المذاق الرفيع في قلب حاسي بحبح - طعم لا يُنسى وخدمة توصيل سريعة حتى باب بيتك.</p>
-        <p class="text-gray-300">نعدّ وجباتنا يومياً بأجود المكونات الطازجة والنكهات الأصيلة لتستمتع بتجربة تذوق فريدة في كل طلب.</p>
-
-        <div class="flex gap-3 mt-4">
-          <a href="#menu" class="px-4 py-3 rounded-md text-black font-semibold accent-btn shadow">اطلب الآن</a>
-          <a href="#contact" class="px-4 py-3 rounded-md border border-gray-700 text-gray-200">اتصل أو زور صفحتنا</a>
-        </div>
-
-        <div class="mt-6 text-sm text-amber-400">
-          <strong>ملاحظة: </strong>خدمة التوصيل متاحة حصرياً داخل مدينة حاسي بحبح — الدفع نقداً عند الاستلام فقط.
-        </div>
-      </div>
-
-      <div>
-        <div class="rounded-xl overflow-hidden shadow-lg">
-          <img src="https://images.unsplash.com/photo-1544025162-d76694265947?auto=format&fit=crop&w=1400&q=80" alt="أطباق مميزة" class="w-full h-64 object-cover">
-        </div>
-      </div>
-    </section>
-
-    <!-- MENU -->
-    <section id="menu" class="mb-12">
-      <h3 class="text-2xl font-bold mb-4">قائمة الطعام</h3>
-
-      <!-- Burgers -->
-      <div class="mb-8">
-        <h4 class="text-xl font-semibold mb-4">البرغر</h4>
-        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-          <!-- برغر عادي -->
-          <div class="bg-gradient-to-tr from-[#0b1221]/80 to-[#0f1724] p-4 rounded-xl glass border border-gray-800 menu-card transform transition-all duration-300 hover:-translate-y-1 hover:scale-[1.02] hover:shadow-2xl hover:shadow-amber-500/10">
-            <img src="https://images.unsplash.com/photo-1550547660-d9450f859349?auto=format&fit=crop&w=1600&q=80" alt="برغر عادي" class="w-full h-40 object-cover rounded-md mb-3">
-            <h5 class="font-bold text-lg">برغر عادي</h5>
-            <p class="text-sm text-gray-400 mb-2">شريحة لحم مشوية على الفحم مع الخضار الطازجة والصلصة الخاصة - النكهة الكلاسيكية الأصيلة.</p>
-            <div class="flex items-center justify-between mb-3">
-              <div class="text-amber-400 font-semibold">السعر: <span id="price-burger-simple">800 د.ج</span></div>
-              <div class="text-sm text-gray-400">أحجام: حجم عادي / حجم كبير</div>
-            </div>
-            <div class="flex gap-2 items-center">
-              <select class="size-select w-full p-2 bg-transparent border border-gray-700 rounded" data-item-id="burger-simple">
-                <option value="عادي">حجم عادي</option>
-                <option value="كبير">حجم كبير (+200 د.ج)</option>
-              </select>
-              <button class="add-btn px-3 py-2 rounded bg-amber-500 text-black font-semibold active:scale-95 transition-transform" data-id="burger-simple">أضف</button>
-            </div>
-          </div>
-
-          <!-- برغر دوبل فرماج -->
-          <div class="bg-gradient-to-tr from-[#0b1221]/80 to-[#0f1724] p-4 rounded-xl glass border border-gray-800 menu-card transform transition-all duration-300 hover:-translate-y-1 hover:scale-[1.02] hover:shadow-2xl hover:shadow-amber-500/10">
-            <img src="https://images.unsplash.com/photo-1606755962770-0b15f73f8a91?auto=format&fit=crop&w=1600&q=80" alt="برغر دوبل فرماج" class="w-full h-40 object-cover rounded-md mb-3">
-            <h5 class="font-bold text-lg">برغر دوبل فرماج</h5>
-            <p class="text-sm text-gray-400 mb-2">طبقتان غنيتان من الجبن المذاب الفاخر فوق شريحة اللحم المتبلة - تجربة غنية لعشاق الجبن.</p>
-            <div class="flex items-center justify-between mb-3">
-              <div class="text-amber-400 font-semibold">السعر: <span id="price-burger-double">1100 د.ج</span></div>
-              <div class="text-sm text-gray-400">أحجام: حجم عادي / حجم كبير</div>
-            </div>
-            <div class="flex gap-2 items-center">
-              <select class="size-select w-full p-2 bg-transparent border border-gray-700 rounded" data-item-id="burger-double">
-                <option value="عادي">حجم عادي</option>
-                <option value="كبير">حجم كبير (+300 د.ج)</option>
-              </select>
-              <button class="add-btn px-3 py-2 rounded bg-amber-500 text-black font-semibold active:scale-95 transition-transform" data-id="burger-double">أضف</button>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <!-- Pizzas -->
-      <div class="mb-8">
-        <h4 class="text-xl font-semibold mb-4">البيتزا</h4>
-        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-          <!-- بيتزا سامبل -->
-          <div class="bg-gradient-to-tr from-[#0b1221]/80 to-[#0f1724] p-4 rounded-xl glass border border-gray-800 menu-card transform transition-all duration-300 hover:-translate-y-1 hover:scale-[1.02] hover:shadow-2xl hover:shadow-amber-500/10">
-            <img src="https://images.unsplash.com/photo-1601924638867-3ec6d8a5a7a9?auto=format&fit=crop&w=1600&q=80" alt="بيتزا سامبل" class="w-full h-40 object-cover rounded-md mb-3">
-            <h5 class="font-bold text-lg">بيتزا سامبل</h5>
-            <p class="text-sm text-gray-400 mb-2">عجينة هشة مع صلصة الطماطم الفاخرة وجبن الموزاريلا والريحان - البساطة في أبهى صورها.</p>
-            <div class="flex items-center justify-between mb-3">
-              <div class="text-amber-400 font-semibold">الأسعار: <span class="text-sm text-gray-300">صغير 700 د.ج • متوسط 1000 د.ج • كبير 1300 د.ج</span></div>
-            </div>
-            <div class="flex gap-2 items-center">
-              <select class="size-select w-full p-2 bg-transparent border border-gray-700 rounded" data-item-id="pizza-sample">
-                <option value="صغير">صغير</option>
-                <option value="متوسط">متوسط</option>
-                <option value="كبير">كبير</option>
-              </select>
-              <button class="add-btn px-3 py-2 rounded bg-amber-500 text-black font-semibold active:scale-95 transition-transform" data-id="pizza-sample">أضف</button>
-            </div>
-          </div>
-
-          <!-- بيتزا 3 فرماج -->
-          <div class="bg-gradient-to-tr from-[#0b1221]/80 to-[#0f1724] p-4 rounded-xl glass border border-gray-800 menu-card transform transition-all duration-300 hover:-translate-y-1 hover:scale-[1.02] hover:shadow-2xl hover:shadow-amber-500/10">
-            <img src="https://images.unsplash.com/photo-1603079849310-3bd6f9e3f6a9?auto=format&fit=crop&w=1600&q=80" alt="بيتزا 3 فرماج" class="w-full h-40 object-cover rounded-md mb-3">
-            <h5 class="font-bold text-lg">بيتزا 3 فرماج</h5>
-            <p class="text-sm text-gray-400 mb-2">مزيج غني من ثلاثة أجبان فاخرة مذابة حتى العصر الذهبي.</p>
-            <div class="flex items-center justify-between mb-3">
-              <div class="text-amber-400 font-semibold">الأسعار: <span class="text-sm text-gray-300">صغير 800 د.ج • متوسط 1100 د.ج • كبير 1400 د.ج</span></div>
-            </div>
-            <div class="flex gap-2 items-center">
-              <select class="size-select w-full p-2 bg-transparent border border-gray-700 rounded" data-item-id="pizza-3cheese">
-                <option value="صغير">صغير</option>
-                <option value="متوسط">متوسط</option>
-                <option value="كبير">كبير</option>
-              </select>
-              <button class="add-btn px-3 py-2 rounded bg-amber-500 text-black font-semibold active:scale-95 transition-transform" data-id="pizza-3cheese">أضف</button>
-            </div>
-          </div>
-
-          <!-- بيتزا بالطون -->
-          <div class="bg-gradient-to-tr from-[#0b1221]/80 to-[#0f1724] p-4 rounded-xl glass border border-gray-800 menu-card transform transition-all duration-300 hover:-translate-y-1 hover:scale-[1.02] hover:shadow-2xl hover:shadow-amber-500/10">
-            <img src="https://images.unsplash.com/photo-1612874742689-9fb2a5b77d56?auto=format&fit=crop&w=1600&q=80" alt="بيتزا بالطون" class="w-full h-40 object-cover rounded-md mb-3">
-            <h5 class="font-bold text-lg">بيتزا بالطون</h5>
-            <p class="text-sm text-gray-400 mb-2">قطع التونة الفاخرة مع الزيتون الأسود والصلصة الخاصة.</p>
-            <div class="flex items-center justify-between mb-3">
-              <div class="text-amber-400 font-semibold">الأسعار: <span class="text-sm text-gray-300">صغير 850 د.ج • متوسط 1150 د.ج • كبير 1450 د.ج</span></div>
-            </div>
-            <div class="flex gap-2 items-center">
-              <select class="size-select w-full p-2 bg-transparent border border-gray-700 rounded" data-item-id="pizza-tuna">
-                <option value="صغير">صغير</option>
-                <option value="متوسط">متوسط</option>
-                <option value="كبير">كبير</option>
-              </select>
-              <button class="add-btn px-3 py-2 rounded bg-amber-500 text-black font-semibold active:scale-95 transition-transform" data-id="pizza-tuna">أضف</button>
-            </div>
-          </div>
-
-          <!-- بيتزا باللحم -->
-          <div class="bg-gradient-to-tr from-[#0b1221]/80 to-[#0f1724] p-4 rounded-xl glass border border-gray-800 menu-card transform transition-all duration-300 hover:-translate-y-1 hover:scale-[1.02] hover:shadow-2xl hover:shadow-amber-500/10">
-            <img src="https://images.unsplash.com/photo-1601924582975-1dfc62d7f4b6?auto=format&fit=crop&w=1600&q=80" alt="بيتزا باللحم" class="w-full h-40 object-cover rounded-md mb-3">
-            <h5 class="font-bold text-lg">بيتزا باللحم</h5>
-            <p class="text-sm text-gray-400 mb-2">مفروم اللحم المتبل بالأعشاب الطبيعية مع الفلفل والأجبان.</p>
-            <div class="flex items-center justify-between mb-3">
-              <div class="text-amber-400 font-semibold">الأسعار: <span class="text-sm text-gray-300">صغير 900 د.ج • متوسط 1200 د.ج • كبير 1500 د.ج</span></div>
-            </div>
-            <div class="flex gap-2 items-center">
-              <select class="size-select w-full p-2 bg-transparent border border-gray-700 rounded" data-item-id="pizza-meat">
-                <option value="صغير">صغير</option>
-                <option value="متوسط">متوسط</option>
-                <option value="كبير">كبير</option>
-              </select>
-              <button class="add-btn px-3 py-2 rounded bg-amber-500 text-black font-semibold active:scale-95 transition-transform" data-id="pizza-meat">أضف</button>
-            </div>
-          </div>
-
-          <!-- بيتزا بالدجاج -->
-          <div class="bg-gradient-to-tr from-[#0b1221]/80 to-[#0f1724] p-4 rounded-xl glass border border-gray-800 menu-card transform transition-all duration-300 hover:-translate-y-1 hover:scale-[1.02] hover:shadow-2xl hover:shadow-amber-500/10">
-            <img src="https://images.unsplash.com/photo-1604908177522-3f4b77d8a3f5?auto=format&fit=crop&w=1600&q=80" alt="بيتزا بالدجاج" class="w-full h-40 object-cover rounded-md mb-3">
-            <h5 class="font-bold text-lg">بيتزا بالدجاج</h5>
-            <p class="text-sm text-gray-400 mb-2">شرائح صدر الدجاج المتبل والمشوي بعناية مع التوابل الخاصة.</p>
-            <div class="flex items-center justify-between mb-3">
-              <div class="text-amber-400 font-semibold">الأسعار: <span class="text-sm text-gray-300">صغير 900 د.ج • متوسط 1200 د.ج • كبير 1500 د.ج</span></div>
-            </div>
-            <div class="flex gap-2 items-center">
-              <select class="size-select w-full p-2 bg-transparent border border-gray-700 rounded" data-item-id="pizza-chicken">
-                <option value="صغير">صغير</option>
-                <option value="متوسط">متوسط</option>
-                <option value="كبير">كبير</option>
-              </select>
-              <button class="add-btn px-3 py-2 rounded bg-amber-500 text-black font-semibold active:scale-95 transition-transform" data-id="pizza-chicken">أضف</button>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <!-- Drinks -->
-      <div class="mb-8">
-        <h4 class="text-xl font-semibold mb-4">المشروبات</h4>
-        <div class="grid grid-cols-1 sm:grid-cols-3 gap-6">
-          <!-- Coke -->
-          <div class="bg-gradient-to-tr from-[#0b1221]/80 to-[#0f1724] p-4 rounded-xl glass border border-gray-800 flex flex-col menu-card transform transition-all duration-300 hover:-translate-y-1 hover:scale-[1.02] hover:shadow-2xl hover:shadow-amber-500/10">
-            <img src="https://images.unsplash.com/photo-1568759897976-8f15ad6d56c3?auto=format&fit=crop&w=1400&q=80" alt="كوكاكولا" class="w-full h-36 object-cover rounded-md mb-3">
-            <h5 class="font-bold">كوكاكولا</h5>
-            <p class="text-sm text-gray-400 mb-2">مشروب غازي بارد ومنعش.</p>
-            <div class="mt-auto flex items-center justify-between">
-              <div class="text-amber-400 font-semibold">200 د.ج</div>
-              <button class="add-drink px-3 py-2 rounded bg-amber-500 text-black font-semibold active:scale-95 transition-transform" data-id="drink-coke">أضف</button>
-            </div>
-          </div>
-
-          <!-- Pepsi -->
-          <div class="bg-gradient-to-tr from-[#0b1221]/80 to-[#0f1724] p-4 rounded-xl glass border border-gray-800 flex flex-col menu-card transform transition-all duration-300 hover:-translate-y-1 hover:scale-[1.02] hover:shadow-2xl hover:shadow-amber-500/10">
-            <img src="https://images.unsplash.com/photo-1602333566476-0a9e76ec4d41?auto=format&fit=crop&w=1400&q=80" alt="بيبسي" class="w-full h-36 object-cover rounded-md mb-3">
-            <h5 class="font-bold">بيبسي</h5>
-            <p class="text-sm text-gray-400 mb-2">طعم منعش ومفضل لدى الجميع.</p>
-            <div class="mt-auto flex items-center justify-between">
-              <div class="text-amber-400 font-semibold">200 د.ج</div>
-              <button class="add-drink px-3 py-2 rounded bg-amber-500 text-black font-semibold active:scale-95 transition-transform" data-id="drink-pepsi">أضف</button>
-            </div>
-          </div>
-
-          <!-- Hamoud Boualem -->
-          <div class="bg-gradient-to-tr from-[#0b1221]/80 to-[#0f1724] p-4 rounded-xl glass border border-gray-800 flex flex-col menu-card transform transition-all duration-300 hover:-translate-y-1 hover:scale-[1.02] hover:shadow-2xl hover:shadow-amber-500/10">
-            <img src="https://images.unsplash.com/photo-1606312618020-9d7fe3c8b8a4?auto=format&fit=crop&w=1400&q=80" alt="حمود بوعلام" class="w-full h-36 object-cover rounded-md mb-3">
-            <h5 class="font-bold">حمود بوعلام</h5>
-            <p class="text-sm text-gray-400 mb-2">مشروب غازي جزائري تقليدي ومنعش.</p>
-            <div class="mt-auto flex items-center justify-between">
-              <div class="text-amber-400 font-semibold">250 د.ج</div>
-              <button class="add-drink px-3 py-2 rounded bg-amber-500 text-black font-semibold active:scale-95 transition-transform" data-id="drink-hamoud">أضف</button>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- CART & CHECKOUT -->
-    <section id="cart" class="mb-12">
-      <h3 class="text-2xl font-bold mb-4">السلة</h3>
-
-      <div class="md:flex gap-6">
-        <!-- Cart items -->
-        <div class="md:flex-1 bg-[#071026] p-4 rounded-xl border border-gray-800">
-          <div id="cart-items" class="space-y-3">
-            <p class="text-gray-400">لا توجد عناصر في السلة بعد. أضف بعض الأطباق اللذيذة!</p>
-          </div>
-
-          <div class="mt-4 flex items-center justify-between">
-            <div class="text-gray-300">المجموع الجزئي</div>
-            <div id="subtotal" class="text-amber-400 font-semibold">0 د.ج</div>
-          </div>
-
-          <div class="mt-3 flex items-center justify-between">
-            <div class="text-gray-300">رسوم التوصيل (تقديري)</div>
-            <div id="delivery-fee" class="text-gray-300">200 د.ج</div>
-          </div>
-
-          <div class="mt-4 flex items-center justify-between">
-            <div class="text-lg font-bold">المجموع الكلي</div>
-            <div id="grand-total" class="text-2xl font-extrabold text-amber-400">0 د.ج</div>
-          </div>
-
-          <div class="mt-4">
-            <button id="open-checkout" class="w-full py-3 rounded-md bg-amber-600 text-black font-bold active:scale-95 transition-transform">المتابعة إلى الدفع</button>
-          </div>
-
-          <div class="mt-3 text-sm text-gray-400">
-            <strong>طريقة الدفع:</strong> الدفع نقداً عند الاستلام فقط عند وصول الطلب إليك.
-          </div>
-        </div>
-
-        <!-- Summary / Quick actions -->
-        <aside class="w-full md:w-80 mt-4 md:mt-0">
-          <div class="bg-[#071026] p-4 rounded-xl border border-gray-800">
-            <h4 class="font-semibold text-lg mb-2">ملخص الطلب</h4>
-            <p class="text-sm text-gray-400 mb-3">تحقق من السلع واضغط على متابعة لإرسال الطلب عبر الواتساب إلى المطعم.</p>
-            <div class="flex gap-2">
-              <button id="clear-cart" class="flex-1 py-2 rounded-md border border-gray-700 text-gray-200">تفريغ السلة</button>
-              <button id="scroll-menu" class="py-2 px-3 rounded-md bg-transparent border border-amber-600 text-amber-400">قائمة الطعام</button>
-            </div>
-          </div>
-        </aside>
-      </div>
-    </section>
-
-    <!-- CONTACT / CHECKOUT FORM -->
-    <section id="contact" class="mb-12">
-      <h3 class="text-2xl font-bold mb-4">تفاصيل التوصيل</h3>
-
-      <div class="bg-[#071026] p-6 rounded-xl border border-gray-800 max-w-3xl">
-        <form id="checkout-form" class="space-y-4">
-          <div>
-            <label class="block text-sm text-gray-300 mb-1">الاسم الكامل</label>
-            <input type="text" id="cust-name" class="w-full p-3 bg-transparent border border-gray-700 rounded" placeholder="اكتب اسمك الكامل">
-          </div>
-
-          <div>
-            <label class="block text-sm text-gray-300 mb-1">رقم الهاتف</label>
-            <input type="tel" id="cust-phone" class="w-full p-3 bg-transparent border border-gray-700 rounded" placeholder="+213XXXXXXXXX">
-          </div>
-
-          <div>
-            <label class="block text-sm text-gray-300 mb-1">العنوان / الحي (حاسي بحبح)</label>
-            <input type="text" id="cust-address" class="w-full p-3 bg-transparent border border-gray-700 rounded" placeholder="مثال: حي 1، شارع النخيل">
-          </div>
-
-          <div>
-            <label class="block text-sm text-gray-300 mb-1">ملاحظات إضافية</label>
-            <textarea id="cust-notes" rows="3" class="w-full p-3 bg-transparent border border-gray-700 rounded" placeholder="ملاحظات مثل: بدون بصل، صوص بجانب، ..."></textarea>
-          </div>
-
-          <div class="text-sm text-amber-400">
-            <strong>ملاحظة الدفع:</strong> طريقة الدفع: الدفع نقداً عند الاستلام فقط عند وصول الطلب إليك.
-          </div>
-
-          <div class="flex gap-3">
-            <button type="button" id="confirm-whatsapp" class="flex-1 py-3 rounded-md bg-green-600 text-black font-bold active:scale-95 transition-transform">تأكيد الطلب عبر الواتساب</button>
-            <button type="button" id="save-local" class="py-3 px-4 rounded-md border border-gray-700">حفظ مؤقتاً</button>
-          </div>
-        </form>
-      </div>
-    </section>
-
-    <!-- FOOTER -->
-    <footer class="mt-12 text-center text-gray-500 text-sm">
-      <div class="flex items-center justify-center gap-4 mb-3">
-        <a href="https://instagram.com/" target="_blank" aria-label="Instagram" class="text-2xl text-gray-400 hover:text-amber-500 transition-colors p-3 rounded-lg bg-transparent hover:bg-gray-800">
-          <i class="fa-brands fa-instagram"></i>
+        <a href="#home" class="logo">
+            <span class="logo-icon">
+                <i class="fa-solid fa-burger"></i>
+            </span>
+            مطعم 311
         </a>
-        <a href="https://facebook.com/" target="_blank" aria-label="Facebook" class="text-2xl text-gray-400 hover:text-amber-500 transition-colors p-3 rounded-lg bg-transparent hover:bg-gray-800">
-          <i class="fa-brands fa-facebook-f"></i>
-        </a>
-        <a href="tel:+213XXXXXXXXX" aria-label="اتصال" class="text-2xl text-gray-400 hover:text-amber-500 transition-colors p-3 rounded-lg bg-transparent hover:bg-gray-800">
-          <i class="fa-solid fa-phone"></i>
-        </a>
-      </div>
-      <p>© جميع الحقوق محفوظة — مطعم 311 — خدمة التوصيل داخل حاسي بحبح فقط.</p>
-    </footer>
-  </main>
 
-  <!-- Cart Drawer Overlay and Drawer -->
-  <div id="cart-drawer-overlay" class="fixed inset-0 bg-black bg-opacity-40 opacity-0 pointer-events-none transition-opacity duration-300 z-40"></div>
-  <aside id="cart-drawer" class="fixed top-0 right-0 h-full w-full sm:w-96 bg-[#071026] transform translate-x-full transition-transform duration-300 z-50 shadow-2xl overflow-y-auto">
-    <div class="p-4 border-b border-gray-800 flex items-center justify-between">
-      <h4 class="text-lg font-bold">السلة</h4>
-      <button id="close-drawer" class="text-gray-300 p-2 hover:text-white">×</button>
-    </div>
-    <div class="p-4" id="drawer-cart-content">
-      <div id="drawer-cart-items" class="space-y-3"></div>
-      <div class="mt-4">
-        <div class="flex items-center justify-between text-gray-300">المجموع الجزئي <div id="drawer-subtotal" class="text-amber-400 font-semibold">0 د.ج</div></div>
-        <div class="flex items-center justify-between text-gray-300 mt-2">رسوم التوصيل <div id="drawer-delivery-fee" class="text-gray-300">200 د.ج</div></div>
-        <div class="flex items-center justify-between text-lg font-bold mt-3">المجموع الكلي <div id="drawer-grand-total" class="text-2xl font-extrabold text-amber-400">0 د.ج</div></div>
-        <div class="mt-4">
-          <button id="drawer-checkout" class="w-full py-3 rounded-md bg-amber-600 text-black font-bold active:scale-95 transition-transform">المتابعة إلى الدفع</button>
+        <div class="nav-links">
+            <a href="#home">الرئيسية</a>
+            <a href="#menu">قائمة طعام</a>
+            <a href="#checkout">كمل طلبك</a>
         </div>
-      </div>
+
+        <button class="cart-btn" onclick="openCart()">
+            <i class="fa-solid fa-bag-shopping"></i>
+            <span class="cart-count" id="cartCount">0</span>
+        </button>
+
+    </nav>
+</header>
+
+
+<!-- ================= HERO ================= -->
+
+<section class="hero" id="home">
+
+    <div class="hero-content">
+
+        <div class="hero-badge">
+            <i class="fa-solid fa-location-dot"></i>
+            التوصيل داخل حاسي بحبح
+        </div>
+
+        <h1>
+            جوعان؟
+            <span>خلي الباقي علينا 😋</span>
+        </h1>
+
+        <p>
+            المذاق لي يخلّيك ترجع ثاني.
+            اختار واش تحب، زيدو للسلة وخلي علينا الباقي.
+        </p>
+
+        <div class="hero-buttons">
+
+            <a href="#menu" class="btn btn-primary">
+                <i class="fa-solid fa-utensils"></i>
+                شوف وش كاين
+            </a>
+
+            <button class="btn btn-light" onclick="openCart()">
+                <i class="fa-solid fa-bag-shopping"></i>
+                شوف السلة
+            </button>
+
+        </div>
+
     </div>
-  </aside>
 
-  <!-- Floating open cart button -->
-  <button id="open-drawer" class="fixed bottom-6 right-6 z-50 p-3 rounded-full bg-amber-500 text-black shadow-lg hover:shadow-2xl transition-transform active:scale-95">
-    <i class="fa-solid fa-cart-plus text-xl"></i>
-  </button>
+</section>
 
-  <!-- Toast -->
-  <div id="toast" class="fixed bottom-6 left-1/2 -translate-x-1/2 z-50 hidden">
-    <div class="bg-[#0b1221] text-amber-400 px-4 py-3 rounded shadow-lg border border-gray-700">تم إرسال الطلب عبر الواتساب.</div>
-  </div>
 
-  <!-- Scripts -->
-  <script src="script.js"></script>
+<!-- ================= MENU ================= -->
+
+<section class="section" id="menu">
+
+    <div class="section-head">
+
+        <small>🍔 واش راك حاب؟</small>
+
+        <h2>قائمة طعام</h2>
+
+        <p>
+            اختار واش يعجبك وزيدو للسلة
+        </p>
+
+    </div>
+
+
+    <div class="categories">
+
+        <button
+            class="category-btn active"
+            onclick="filterProducts('all', this)"
+        >
+            كامل
+        </button>
+
+        <button
+            class="category-btn"
+            onclick="filterProducts('burger', this)"
+        >
+            البرغر
+        </button>
+
+        <button
+            class="category-btn"
+            onclick="filterProducts('pizza', this)"
+        >
+            البيتزا
+        </button>
+
+        <button
+            class="category-btn"
+            onclick="filterProducts('drink', this)"
+        >
+            المشروبات
+        </button>
+
+    </div>
+
+
+    <div class="products" id="products"></div>
+
+</section>
+
+
+<!-- ================= FEATURES ================= -->
+
+<section class="features">
+
+    <div class="features-grid">
+
+        <div class="feature">
+
+            <i class="fa-solid fa-truck-fast"></i>
+
+            <h3>التوصيل للدار</h3>
+
+            <p>
+                نوصّلو طلبك داخل حاسي بحبح.
+            </p>
+
+        </div>
+
+
+        <div class="feature">
+
+            <i class="fa-solid fa-money-bill-wave"></i>
+
+            <h3>الخلاص كي يوصلك الطلب</h3>
+
+            <p>
+                خلّص كاش كي يوصلك الموصّي.
+            </p>
+
+        </div>
+
+
+        <div class="feature">
+
+            <i class="fa-solid fa-burger"></i>
+
+            <h3>سخون وطايب</h3>
+
+            <p>
+                نحضرو طلبك باش يوصلك مليح.
+            </p>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- ================= CHECKOUT ================= -->
+
+<section class="checkout-section" id="checkout">
+
+    <div class="section">
+
+        <div class="checkout-box">
+
+            <div class="checkout-title">
+
+                <h2>كمل طلبك</h2>
+
+                <p>
+                    عمر معلوماتك وبرك، والباقي علينا
+                </p>
+
+            </div>
+
+
+            <div class="payment-notice">
+
+                <i class="fa-solid fa-money-bill-wave"></i>
+
+                <div>
+
+                    <strong>
+                        الخلاص كي يوصلك الطلب
+                    </strong>
+
+                    <br>
+
+                    ما تحتاج لا كارطة لا تحويل لا والو.
+                    خلّص كاش كي يوصلك الطلب للدار.
+
+                </div>
+
+            </div>
+
+
+            <form id="orderForm">
+
+                <div class="form-grid">
+
+                    <div class="form-group">
+
+                        <label>
+                            شكون راح يستلم؟
+                        </label>
+
+                        <input
+                            type="text"
+                            id="customerName"
+                            placeholder="كتب اسمك"
+                            required
+                        >
+
+                    </div>
+
+
+                    <div class="form-group">
+
+                        <label>
+                            نمرو التلفون
+                        </label>
+
+                        <input
+                            type="tel"
+                            id="customerPhone"
+                            placeholder="05 / 06 / 07..."
+                            required
+                        >
+
+                    </div>
+
+
+                    <div class="form-group full">
+
+                        <label>
+                            وين نوصّلوه؟
+                        </label>
+
+                        <input
+                            type="text"
+                            id="customerAddress"
+                            placeholder="كتب العنوان بالتفصيل"
+                            required
+                        >
+
+                    </div>
+
+
+                    <div class="form-group full">
+
+                        <label>
+                            حاجة حاب تزيدها؟
+                        </label>
+
+                        <textarea
+                            id="customerNotes"
+                            placeholder="مثلاً: بلا بصل، زيد صوص، ولا أي ملاحظة..."
+                        ></textarea>
+
+                    </div>
+
+                </div>
+
+
+                <button
+                    type="submit"
+                    class="btn btn-primary submit-order"
+                >
+
+                    <i class="fa-brands fa-whatsapp"></i>
+
+                    أكد الطلب فالواتساب
+
+                </button>
+
+            </form>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- ================= FOOTER ================= -->
+
+<footer>
+
+    <div class="footer-content">
+
+        <div class="footer-brand">
+
+            <h3>
+                مطعم 311
+            </h3>
+
+            <p>
+                المذاق لي يخلّيك ترجع ثاني ❤️
+                <br>
+                توصيل وطلبات داخل حاسي بحبح.
+            </p>
+
+        </div>
+
+
+        <div class="footer-col">
+
+            <h4>
+                روابط
+            </h4>
+
+            <a href="#home">
+                الرئيسية
+            </a>
+
+            <a href="#menu">
+                قائمة طعام
+            </a>
+
+            <a href="#checkout">
+                كمل طلبك
+            </a>
+
+        </div>
+
+
+        <div class="footer-col">
+
+            <h4>
+                تواصل معانا
+            </h4>
+
+            <a href="#">
+                <i class="fa-brands fa-facebook"></i>
+                فيسبوك
+            </a>
+
+            <a href="#">
+                <i class="fa-brands fa-instagram"></i>
+                إنستغرام
+            </a>
+
+            <a href="tel:0000000000">
+                <i class="fa-solid fa-phone"></i>
+                00 00 00 00 00
+            </a>
+
+        </div>
+
+    </div>
+
+
+    <div class="footer-bottom">
+
+        © 2026 مطعم 311 — كامل الحقوق محفوظة
+
+    </div>
+
+</footer>
+
+
+<!-- ================= CART ================= -->
+
+<div
+    class="overlay"
+    id="overlay"
+    onclick="closeCart()"
+></div>
+
+
+<aside
+    class="cart-drawer"
+    id="cartDrawer"
+>
+
+    <div class="cart-header">
+
+        <h3>
+            <i class="fa-solid fa-bag-shopping"></i>
+            السلة تاعك
+        </h3>
+
+        <button
+            class="close-cart"
+            onclick="closeCart()"
+        >
+
+            <i class="fa-solid fa-xmark"></i>
+
+        </button>
+
+    </div>
+
+
+    <div
+        class="cart-items"
+        id="cartItems"
+    ></div>
+
+
+    <div class="cart-footer">
+
+        <div class="summary-row">
+
+            <span>
+                المجموع تاع الماكلة
+            </span>
+
+            <strong id="subtotal">
+                0 دج
+            </strong>
+
+        </div>
+
+
+        <div class="summary-row">
+
+            <span>
+                التوصيل
+            </span>
+
+            <strong id="delivery">
+                0 دج
+            </strong>
+
+        </div>
+
+
+        <div class="summary-row total">
+
+            <span>
+                المجموع كامل
+            </span>
+
+            <strong id="total">
+                0 دج
+            </strong>
+
+        </div>
+
+
+        <div class="cod-box">
+
+            <i class="fa-solid fa-money-bill-wave"></i>
+
+            <div>
+
+                <strong>
+                    الخلاص كي يوصلك الطلب
+                </strong>
+
+                <br>
+
+                خلّص كاش للموصّي كي يوصلك الطلب.
+
+            </div>
+
+        </div>
+
+
+        <button
+            class="clear-cart"
+            onclick="clearCart()"
+        >
+
+            <i class="fa-solid fa-trash"></i>
+
+            فرّغ السلة
+
+        </button>
+
+
+        <button
+            class="btn btn-primary checkout-btn"
+            onclick="goToCheckout()"
+        >
+
+            <i class="fa-solid fa-arrow-left"></i>
+
+            كمل الطلب
+
+        </button>
+
+    </div>
+
+</aside>
+
+
+<!-- ================= TOAST ================= -->
+
+<div
+    class="toast"
+    id="toast"
+></div>
+
+
+<script>
+
+    /* =====================================================
+       إعدادات الموقع
+    ===================================================== */
+
+    /*
+       مهم بزاف:
+
+       بدّل الرقم هذا برقم واتساب المطعم.
+
+       مثال:
+
+       0551234567
+
+       توليه:
+
+       213551234567
+
+       بلا + وبلا مسافات.
+    */
+
+    const WHATSAPP_NUMBER = "213XXXXXXXXX";
+
+    const DELIVERY_FEE = 200;
+
+    const STORAGE_KEY = "restaurant311_cart";
+
+
+    /* =====================================================
+       المنتجات
+    ===================================================== */
+
+    const products = [
+
+        /* ================= BURGERS ================= */
+
+        {
+            id: "burger-simple",
+            name: "برغر بسيط",
+            category: "burger",
+            description: "برغر طايب مع الخبز، اللحم والصوص.",
+            image: "https://images.unsplash.com/photo-1568901346375-23c9450c58cd?auto=format&fit=crop&w=900&q=85",
+            sizes: [
+                {
+                    name: "عادي",
+                    price: 800
+                },
+                {
+                    name: "كبير",
+                    price: 1000
+                }
+            ]
+        },
+
+
+        {
+            id: "burger-double",
+            name: "برغر دابل",
+            category: "burger",
+            description: "زوج طبقات لحم مع الجبن والصوص.",
+            image: "double-burger.png",
+            sizes: [
+                {
+                    name: "عادي",
+                    price: 1100
+                },
+                {
+                    name: "كبير",
+                    price: 1400
+                }
+            ]
+        },
+
+
+        /* ================= PIZZA ================= */
+
+        {
+            id: "pizza-margherita",
+            name: "بيتزا مارغريتا",
+            category: "pizza",
+            description: "بيتزا سخونة بالطماطم والجبن.",
+            image: "https://images.unsplash.com/photo-1574071318508-1cdbab80d002?auto=format&fit=crop&w=900&q=85",
+            sizes: [
+                {
+                    name: "صغير",
+                    price: 700
+                },
+                {
+                    name: "متوسط",
+                    price: 1000
+                },
+                {
+                    name: "كبير",
+                    price: 1300
+                }
+            ]
+        },
+
+
+        {
+            id: "pizza-cheese",
+            name: "بيتزا فورماج",
+            category: "pizza",
+            description: "بيتزا لعشاق الجبن والذوق القوي.",
+            image: "https://images.unsplash.com/photo-1579751626657-72bc17010498?auto=format&fit=crop&w=900&q=85",
+            sizes: [
+                {
+                    name: "صغير",
+                    price: 800
+                },
+                {
+                    name: "متوسط",
+                    price: 1100
+                },
+                {
+                    name: "كبير",
+                    price: 1400
+                }
+            ]
+        },
+
+
+        {
+            id: "pizza-tuna",
+            name: "بيتزا تونة",
+            category: "pizza",
+            description: "تونة، جبن وصوص فوق عجينة طايبة.",
+            image: "https://images.unsplash.com/photo-1566843972142-a7fcb70de55a?auto=format&fit=crop&w=900&q=85",
+            sizes: [
+                {
+                    name: "صغير",
+                    price: 850
+                },
+                {
+                    name: "متوسط",
+                    price: 1150
+                },
+                {
+                    name: "كبير",
+                    price: 1450
+                }
+            ]
+        },
+
+
+        {
+            id: "pizza-meat",
+            name: "بيتزا لحم",
+            category: "pizza",
+            description: "لحم مفروم، جبن وصوص.",
+            image: "https://images.unsplash.com/photo-1574071318508-1cdbab80d002?auto=format&fit=crop&w=900&q=85",
+            sizes: [
+                {
+                    name: "صغير",
+                    price: 900
+                },
+                {
+                    name: "متوسط",
+                    price: 1200
+                },
+                {
+                    name: "كبير",
+                    price: 1500
+                }
+            ]
+        },
+
+
+        {
+            id: "pizza-chicken",
+            name: "بيتزا دجاج",
+            category: "pizza",
+            description: "دجاج، جبن وصوص بطعم هايل.",
+            image: "https://images.unsplash.com/photo-1593560708920-61dd98c46a4e?auto=format&fit=crop&w=900&q=85",
+            sizes: [
+                {
+                    name: "صغير",
+                    price: 900
+                },
+                {
+                    name: "متوسط",
+                    price: 1200
+                },
+                {
+                    name: "كبير",
+                    price: 1500
+                }
+            ]
+        },
+
+
+        /* ================= DRINKS ================= */
+
+        {
+            id: "coca-cola",
+            name: "كوكاكولا",
+            category: "drink",
+            description: "كوكاكولا باردة ومنعشة.",
+            image: "cocacola.png",            sizes: [
+                {
+                    name: "33cl",
+                    price: 200
+                }
+            ]
+        },
+
+
+        {
+            id: "pepsi",
+            name: "بيبسي",
+            category: "drink",
+            description: "بيبسي باردة ومنعشة.",
+            image: "pepsi_PNG8955.png",            sizes: [
+                {
+                    name: "33cl",
+                    price: 200
+                }
+            ]
+        },
+
+
+        {
+            id: "hamoud-boualem",
+            name: "حمود بوعلام",
+            category: "drink",
+            description: "المشروب الغازي الجزائري حمود بوعلام.",
+            image: "https://areej.store/wp-content/uploads/2023/03/hamoud_33cl_pet.jpg",
+            sizes: [
+                {
+                    name: "33cl",
+                    price: 250
+                }
+            ]
+        }
+
+    ];
+
+
+    /* =====================================================
+       السلة
+    ===================================================== */
+
+    let cart =
+        JSON.parse(
+            localStorage.getItem(STORAGE_KEY)
+        ) || [];
+
+
+    /* =====================================================
+       عرض المنتجات
+    ===================================================== */
+
+    function renderProducts(category = "all") {
+
+        const container =
+            document.getElementById("products");
+
+        let filteredProducts = products;
+
+        if (category !== "all") {
+
+            filteredProducts =
+                products.filter(
+                    product =>
+                        product.category === category
+                );
+
+        }
+
+
+        container.innerHTML =
+            filteredProducts.map(product => {
+
+                const firstSize =
+                    product.sizes[0];
+
+
+                return `
+
+                    <div class="product-card">
+
+                        <div class="product-image">
+
+                            <img
+                                src="${product.image}"
+                                alt="${product.name}"
+                                loading="lazy"
+                            >
+
+                        </div>
+
+
+                        <div class="product-content">
+
+                            <h3 class="product-title">
+                                ${product.name}
+                            </h3>
+
+
+                            <p class="product-description">
+                                ${product.description}
+                            </p>
+
+
+                            <div class="sizes">
+
+                                ${product.sizes.map(
+                                    (size, index) => `
+
+                                    <button
+                                        class="size-btn ${index === 0 ? "active" : ""}"
+                                        data-product="${product.id}"
+                                        data-size="${size.name}"
+                                        data-price="${size.price}"
+                                        onclick="selectSize(this)"
+                                    >
+                                        ${size.name}
+                                    </button>
+
+                                `).join("")}
+
+                            </div>
+
+
+                            <div class="product-bottom">
+
+                                <div
+                                    class="price"
+                                    id="price-${product.id}"
+                                >
+                                    ${firstSize.price} دج
+                                </div>
+
+
+                                <button
+                                    class="add-btn"
+                                    onclick="addProduct('${product.id}')"
+                                >
+
+                                    <i class="fa-solid fa-plus"></i>
+
+                                    زيد
+
+                                </button>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                `;
+
+            }).join("");
+
+    }
+
+
+    /* =====================================================
+       اختيار الحجم
+    ===================================================== */
+
+    function selectSize(button) {
+
+        const productId =
+            button.dataset.product;
+
+
+        document
+            .querySelectorAll(
+                `[data-product="${productId}"]`
+            )
+            .forEach(btn =>
+                btn.classList.remove("active")
+            );
+
+
+        button.classList.add("active");
+
+
+        const price =
+            Number(button.dataset.price);
+
+
+        document
+            .getElementById(`price-${productId}`)
+            .textContent =
+                price.toLocaleString("fr-DZ") +
+                " دج";
+
+    }
+
+
+    /* =====================================================
+       إضافة للسلة
+    ===================================================== */
+
+    function addProduct(productId) {
+
+        const product =
+            products.find(
+                p => p.id === productId
+            );
+
+
+        if (!product) return;
+
+
+        const activeSize =
+            document.querySelector(
+                `[data-product="${productId}"].active`
+            );
+
+
+        const sizeName =
+            activeSize
+                ? activeSize.dataset.size
+                : product.sizes[0].name;
+
+
+        const price =
+            activeSize
+                ? Number(activeSize.dataset.price)
+                : product.sizes[0].price;
+
+
+        const existing =
+            cart.find(
+                item =>
+                    item.productId === productId &&
+                    item.size === sizeName
+            );
+
+
+        if (existing) {
+
+            existing.quantity++;
+
+        } else {
+
+            cart.push({
+
+                productId: productId,
+
+                name: product.name,
+
+                size: sizeName,
+
+                price: price,
+
+                image: product.image,
+
+                quantity: 1
+
+            });
+
+        }
+
+
+        saveCart();
+
+        renderCart();
+
+        showToast("تزاد للسلة ✅");
+
+    }
+
+
+    /* =====================================================
+       حفظ السلة
+    ===================================================== */
+
+    function saveCart() {
+
+        localStorage.setItem(
+            STORAGE_KEY,
+            JSON.stringify(cart)
+        );
+
+    }
+
+
+    /* =====================================================
+       عرض السلة
+    ===================================================== */
+
+    function renderCart() {
+
+        const container =
+            document.getElementById("cartItems");
+
+
+        const count =
+            cart.reduce(
+                (total, item) =>
+                    total + item.quantity,
+                0
+            );
+
+
+        document
+            .getElementById("cartCount")
+            .textContent = count;
+
+
+        if (cart.length === 0) {
+
+            container.innerHTML = `
+
+                <div class="empty-cart">
+
+                    <i class="fa-solid fa-bag-shopping"></i>
+
+                    <h4>
+                        السلة ما فيها والو
+                    </h4>
+
+                    <p>
+                        زيد حاجة مليحة من قائمة الطعام 😋
+                    </p>
+
+                </div>
+
+            `;
+
+
+            document
+                .getElementById("subtotal")
+                .textContent = "0 دج";
+
+
+            document
+                .getElementById("delivery")
+                .textContent = "0 دج";
+
+
+            document
+                .getElementById("total")
+                .textContent = "0 دج";
+
+
+            return;
+
+        }
+
+
+        container.innerHTML =
+            cart.map((item,index) => `
+
+                <div class="cart-item">
+
+                    <img
+                        class="cart-item-img"
+                        src="${item.image}"
+                        alt="${item.name}"
+                    >
+
+
+                    <div class="cart-item-info">
+
+                        <h4>
+                            ${item.name}
+                        </h4>
+
+
+                        <div class="cart-item-size">
+                            الحجم: ${item.size}
+                        </div>
+
+
+                        <div class="cart-item-price">
+                            ${item.price.toLocaleString("fr-DZ")} دج
+                        </div>
+
+
+                        <div class="cart-actions">
+
+                            <div class="quantity">
+
+                                <button
+                                    onclick="changeQuantity(${index}, -1)"
+                                >
+                                    −
+                                </button>
+
+
+                                <span>
+                                    ${item.quantity}
+                                </span>
+
+
+                                <button
+                                    onclick="changeQuantity(${index}, 1)"
+                                >
+                                    +
+                                </button>
+
+                            </div>
+
+
+                            <button
+                                class="delete-item"
+                                onclick="removeItem(${index})"
+                            >
+
+                                <i class="fa-solid fa-trash"></i>
+
+                            </button>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            `).join("");
+
+
+        updateSummary();
+
+    }
+
+
+    /* =====================================================
+       الكمية
+    ===================================================== */
+
+    function changeQuantity(index, amount) {
+
+        if (!cart[index]) return;
+
+
+        cart[index].quantity += amount;
+
+
+        if (cart[index].quantity <= 0) {
+
+            cart.splice(index,1);
+
+            showToast("تحذف من السلة");
+
+        }
+
+
+        saveCart();
+
+        renderCart();
+
+    }
+
+
+    /* =====================================================
+       حذف
+    ===================================================== */
+
+    function removeItem(index) {
+
+        cart.splice(index,1);
+
+        saveCart();
+
+        renderCart();
+
+        showToast("تحذف من السلة");
+
+    }
+
+
+    /* =====================================================
+       تفريغ السلة
+    ===================================================== */
+
+    function clearCart() {
+
+        if (cart.length === 0) return;
+
+
+        cart = [];
+
+
+        saveCart();
+
+        renderCart();
+
+        showToast("السلة تفرغات");
+
+    }
+
+
+    /* =====================================================
+       الحساب
+    ===================================================== */
+
+    function updateSummary() {
+
+        const subtotal =
+            cart.reduce(
+                (total,item) =>
+                    total +
+                    item.price * item.quantity,
+                0
+            );
+
+
+        const delivery =
+            subtotal > 0
+                ? DELIVERY_FEE
+                : 0;
+
+
+        const total =
+            subtotal + delivery;
+
+
+        document
+            .getElementById("subtotal")
+            .textContent =
+                subtotal.toLocaleString("fr-DZ") +
+                " دج";
+
+
+        document
+            .getElementById("delivery")
+            .textContent =
+                delivery.toLocaleString("fr-DZ") +
+                " دج";
+
+
+        document
+            .getElementById("total")
+            .textContent =
+                total.toLocaleString("fr-DZ") +
+                " دج";
+
+    }
+
+
+    /* =====================================================
+       فتح السلة
+    ===================================================== */
+
+    function openCart() {
+
+        document
+            .getElementById("cartDrawer")
+            .classList.add("open");
+
+
+        document
+            .getElementById("overlay")
+            .classList.add("show");
+
+
+        document.body.style.overflow =
+            "hidden";
+
+    }
+
+
+    /* =====================================================
+       غلق السلة
+    ===================================================== */
+
+    function closeCart() {
+
+        document
+            .getElementById("cartDrawer")
+            .classList.remove("open");
+
+
+        document
+            .getElementById("overlay")
+            .classList.remove("show");
+
+
+        document.body.style.overflow = "";
+
+    }
+
+
+    /* =====================================================
+       إكمال الطلب
+    ===================================================== */
+
+    function goToCheckout() {
+
+        if (cart.length === 0) {
+
+            showToast(
+                "السلة مازال فارغة 😅"
+            );
+
+            return;
+
+        }
+
+
+        closeCart();
+
+
+        document
+            .getElementById("checkout")
+            .scrollIntoView({
+                behavior: "smooth"
+            });
+
+    }
+
+
+    /* =====================================================
+       تصنيف المنتجات
+    ===================================================== */
+
+    function filterProducts(category, button) {
+
+        document
+            .querySelectorAll(".category-btn")
+            .forEach(btn =>
+                btn.classList.remove("active")
+            );
+
+
+        button.classList.add("active");
+
+
+        renderProducts(category);
+
+    }
+
+
+    /* =====================================================
+       Toast
+    ===================================================== */
+
+    let toastTimer;
+
+
+    function showToast(message) {
+
+        const toast =
+            document.getElementById("toast");
+
+
+        toast.textContent = message;
+
+
+        toast.classList.add("show");
+
+
+        clearTimeout(toastTimer);
+
+
+        toastTimer =
+            setTimeout(() => {
+
+                toast.classList.remove("show");
+
+            },2500);
+
+    }
+
+
+    /* =====================================================
+       إرسال الطلب للواتساب
+    ===================================================== */
+
+    document
+        .getElementById("orderForm")
+        .addEventListener(
+            "submit",
+            function(event) {
+
+                event.preventDefault();
+
+
+                if (cart.length === 0) {
+
+                    showToast(
+                        "زيد حاجة للسلة قبل ما تكمل الطلب 😅"
+                    );
+
+                    openCart();
+
+                    return;
+
+                }
+
+
+                const name =
+                    document
+                        .getElementById("customerName")
+                        .value
+                        .trim();
+
+
+                const phone =
+                    document
+                        .getElementById("customerPhone")
+                        .value
+                        .trim();
+
+
+                const address =
+                    document
+                        .getElementById("customerAddress")
+                        .value
+                        .trim();
+
+
+                const notes =
+                    document
+                        .getElementById("customerNotes")
+                        .value
+                        .trim();
+
+
+                const subtotal =
+                    cart.reduce(
+                        (total,item) =>
+                            total +
+                            item.price *
+                            item.quantity,
+                        0
+                    );
+
+
+                const delivery =
+                    DELIVERY_FEE;
+
+
+                const total =
+                    subtotal + delivery;
+
+
+                let message =
+                    "سلام 👋%0A%0A" +
+                    "حاب نأكد هاد الطلب من مطعم 311 🍔%0A%0A";
+
+
+                message +=
+                    "👤 الاسم: " +
+                    encodeURIComponent(name) +
+                    "%0A";
+
+
+                message +=
+                    "📞 النمرو: " +
+                    encodeURIComponent(phone) +
+                    "%0A";
+
+
+                message +=
+                    "📍 العنوان: " +
+                    encodeURIComponent(address) +
+                    "%0A%0A";
+
+
+                message +=
+                    "🛒 الطلب:%0A";
+
+
+                cart.forEach(item => {
+
+                    const line =
+                        "- " +
+                        item.name +
+                        " (" +
+                        item.size +
+                        ") × " +
+                        item.quantity +
+                        " = " +
+                        (
+                            item.price *
+                            item.quantity
+                        ).toLocaleString("fr-DZ") +
+                        " دج";
+
+
+                    message +=
+                        encodeURIComponent(line) +
+                        "%0A";
+
+                });
+
+
+                message +=
+                    "%0A💰 المجموع تاع الماكلة: " +
+                    subtotal.toLocaleString("fr-DZ") +
+                    " دج%0A";
+
+
+                message +=
+                    "🚚 التوصيل: " +
+                    delivery.toLocaleString("fr-DZ") +
+                    " دج%0A";
+
+
+                message +=
+                    "💵 المجموع كامل: " +
+                    total.toLocaleString("fr-DZ") +
+                    " دج%0A%0A";
+
+
+                message +=
+                    "💵 الخلاص: كي يوصلي الطلب%0A";
+
+
+                if (notes) {
+
+                    message +=
+                        "📝 ملاحظة: " +
+                        encodeURIComponent(notes) +
+                        "%0A";
+
+                }
+
+
+                const whatsappURL =
+                    "https://wa.me/" +
+                    WHATSAPP_NUMBER +
+                    "?text=" +
+                    message;
+
+
+                window.open(
+                    whatsappURL,
+                    "_blank"
+                );
+
+            }
+        );
+
+
+    /* =====================================================
+       تشغيل الموقع
+    ===================================================== */
+
+    renderProducts();
+
+    renderCart();
+
+</script>
+
 </body>
 </html>
